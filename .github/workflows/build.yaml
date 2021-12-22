@@ -22,10 +22,7 @@ jobs:
           go-version: 1.17
       - name: Check format
         run: |
-          if [ -z $(go fmt ./...) ]; then
-            echo "Please run 'go fmt ./...' to fix format"
-            exit 1
-          fi
+          test -z $(go fmt ./...) || { echo "Please run 'go fmt ./...' to fix format"; exit 1; } 
       - name: Cache Go modules
         uses: actions/cache@v1
         with:
