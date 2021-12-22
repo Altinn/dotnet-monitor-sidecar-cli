@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: test
+  name: test
+  namespace: test
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: test
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      annotations:
+        dev.local/dd-added: "true"
+        dev.local/dd-apply: '{"containerToDebug":"dotnet-container","debugContainerName":"debug","tmpdirAdded":true,"secretMount":"dd-monitor-apikey-fzlgw"}'
+      creationTimestamp: null
+      labels:
+        app: test
+    spec:
+      containers:
+      - image: test:latest
+        imagePullPolicy: Always
+        name: dotnet-container
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmpfolder-hqlsx
+      - args:
+        - --urls
+        - http://*:52323
+        image: test
+        imagePullPolicy: IfNotPresent
+        name: debug
+        ports:
+        - containerPort: 52323
+        resources:
+          limits:
+            cpu: 250m
+            memory: 256Mi
+          requests:
+            cpu: 50m
+            memory: 32Mi
+        securityContext:
+          capabilities:
+            add:
+            - SYS_PTRACE
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmpfolder-hqlsx
+        - mountPath: /etc/dotnet-monitor
+          name: dd-monitor-apikey-fzlgw
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - emptyDir: {}
+        name: tmpfolder-hqlsx
+      - name: dd-monitor-apikey-fzlgw
+        secret:
+          secretName: dd-monitor-apikey-fzlgw
+status: {}

@@ -1,0 +1,45 @@
+metadata:
+  annotations:
+    dev.local/dd-added: "true"
+    dev.local/dd-apply: '{"containerToDebug":"test","debugContainerName":"debug","tmpdirAdded":false,"secretMount":"test"}'
+  creationTimestamp: null
+  name: test
+spec:
+  containers:
+  - name: test
+    resources: {}
+    volumeMounts:
+    - mountPath: /tmp
+      name: test
+  - args:
+    - --urls
+    - http://*:52323
+    image: test:latest
+    imagePullPolicy: IfNotPresent
+    name: debug
+    ports:
+    - containerPort: 52323
+    resources:
+      limits:
+        cpu: 250m
+        memory: 256Mi
+      requests:
+        cpu: 50m
+        memory: 32Mi
+    securityContext:
+      capabilities:
+        add:
+        - SYS_PTRACE
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /tmp
+      name: test
+    - mountPath: /etc/dotnet-monitor
+      name: test
+  volumes:
+  - emptyDir: {}
+    name: test
+  - name: test
+    secret:
+      secretName: test

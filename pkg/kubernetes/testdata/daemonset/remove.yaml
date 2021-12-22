@@ -1,0 +1,106 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  creationTimestamp: null
+  labels:
+    app: test
+  name: test
+  namespace: test
+spec:
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: test
+  template:
+    metadata:
+      annotations:
+        dev.local/dd-added: "true"
+        dev.local/dd-apply: '{"containerToDebug":"test","debugContainerName":"debug","tmpdirAdded":true,"secretMount":"dd-monitor-apikey-w4hhs"}'
+      creationTimestamp: null
+      labels:
+        app: test
+    spec:
+      containers:
+      - env:
+        - name: APP_INFO
+          value: Testing
+        image: test:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /hello
+            port: 5000
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: test
+        ports:
+        - containerPort: 5000
+          name: http
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /hello
+            port: 5000
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmpfolder-mnnvd
+      - args:
+        - --urls
+        - http://*:52323
+        image: test
+        imagePullPolicy: IfNotPresent
+        name: debug
+        ports:
+        - containerPort: 52323
+        resources:
+          limits:
+            cpu: 250m
+            memory: 256Mi
+          requests:
+            cpu: 50m
+            memory: 32Mi
+        securityContext:
+          capabilities:
+            add:
+            - SYS_PTRACE
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmpfolder-mnnvd
+        - mountPath: /etc/dotnet-monitor
+          name: dd-monitor-apikey-w4hhs
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - emptyDir: {}
+        name: tmpfolder-mnnvd
+      - name: dd-monitor-apikey-w4hhs
+        secret:
+          secretName: dd-monitor-apikey-w4hhs
+  updateStrategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
+status:
+  currentNumberScheduled: 0
+  desiredNumberScheduled: 0
+  numberMisscheduled: 0
+  numberReady: 0

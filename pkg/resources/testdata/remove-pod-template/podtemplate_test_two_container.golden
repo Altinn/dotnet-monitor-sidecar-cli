@@ -1,0 +1,15 @@
+metadata:
+  creationTimestamp: null
+  name: test
+spec:
+  containers:
+  - name: test
+    resources: {}
+    volumeMounts:
+    - mountPath: /tmp
+      name: test
+  - name: test2
+    resources: {}
+  volumes:
+  - emptyDir: {}
+    name: test
