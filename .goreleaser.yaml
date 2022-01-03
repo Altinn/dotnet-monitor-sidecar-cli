@@ -10,3 +10,7 @@ builds:
       - arm64
     ldflags:
       - -X 'github.com/altinn/dotnet-monitor-sidecar-cli/cmd.versionString={{ .Version }}'
+archives:
+  - format_overrides:
+    - goos: windows
+      format: zip
