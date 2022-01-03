@@ -11,6 +11,7 @@ import (
 func main() {
 	ctx := context.Background()
 	dmsctl := cmd.NewDmsctlCommand(ctx)
+	dmsctl.DisableAutoGenTag = true
 	err := doc.GenMarkdownTree(dmsctl, "./docs")
 	if err != nil {
 		log.Fatal(err)
