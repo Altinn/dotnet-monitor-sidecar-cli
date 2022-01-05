@@ -88,8 +88,8 @@ func (h *Helper) GetDDPodApplyInfo(ctx context.Context, namespace, podname strin
 	return appliedConfig, nil
 }
 
-//ListPodsInNamepsace returns list of pods in a namespace
-func (h *Helper) ListPodsInNamepsace(ctx context.Context, namespace string) (*corev1.PodList, error) {
+//ListPodsInNamespace returns list of pods in a namespace
+func (h *Helper) ListPodsInNamespace(ctx context.Context, namespace string) (*corev1.PodList, error) {
 	return h.Client.CoreV1().Pods(namespace).List(ctx, metav1.ListOptions{})
 }
 
