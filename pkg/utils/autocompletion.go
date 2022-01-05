@@ -19,7 +19,7 @@ func AutoCompleteDaemonSets(cmd *cobra.Command, args []string, toComplete string
 	if err != nil {
 		return nil, cobra.ShellCompDirectiveNoFileComp
 	}
-	h, err := getKubernetesHelper(kubeconfig, namespace)
+	h, namespace, err := getKubernetesHelper(kubeconfig, namespace)
 	if err != nil {
 		return nil, cobra.ShellCompDirectiveNoFileComp
 	}
@@ -37,7 +37,7 @@ func AutoCompleteDeployments(cmd *cobra.Command, args []string, toComplete strin
 	if err != nil {
 		return nil, cobra.ShellCompDirectiveNoFileComp
 	}
-	h, err := getKubernetesHelper(kubeconfig, namespace)
+	h, namespace, err := getKubernetesHelper(kubeconfig, namespace)
 	if err != nil {
 		return nil, cobra.ShellCompDirectiveNoFileComp
 	}
@@ -55,7 +55,7 @@ func AutoCompletePodsWithDebugContainer(cmd *cobra.Command, args []string, toCom
 	if err != nil {
 		return nil, cobra.ShellCompDirectiveNoFileComp
 	}
-	h, err := getKubernetesHelper(kubeconfig, namespace)
+	h, namespace, err := getKubernetesHelper(kubeconfig, namespace)
 	if err != nil {
 		return nil, cobra.ShellCompDirectiveNoFileComp
 	}
@@ -68,13 +68,13 @@ func AutoCompletePodsWithDebugContainer(cmd *cobra.Command, args []string, toCom
 }
 
 //getKubernetesHelper returns a kubernetes helper
-func getKubernetesHelper(kubeconfig, namespace string) (h dmskube.Helper, err error) {
+func getKubernetesHelper(kubeconfig, namespace string) (h dmskube.Helper, ns string, err error) {
 	if home := homedir.HomeDir(); home != "" && kubeconfig == "" {
 		kubeconfig = filepath.Join(home, ".kube", "config")
 	}
 	config, err := clientcmd.BuildConfigFromFlags("", kubeconfig)
 	if err != nil {
-		return dmskube.Helper{}, err
+		return dmskube.Helper{}, "", err
 	}
 	if namespace == "" {
 		namespace, err = GetNamespaceFromCurrentContext()
@@ -88,7 +88,7 @@ func getKubernetesHelper(kubeconfig, namespace string) (h dmskube.Helper, err er
 	}
 	return dmskube.Helper{
 		Client: clientset,
-	}, nil
+	}, namespace, nil
 }
 
 //getFlags returns kubeconfig and namespace flags
