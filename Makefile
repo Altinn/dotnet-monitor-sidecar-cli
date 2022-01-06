@@ -19,9 +19,13 @@ cover:
 	go test -coverpkg=./... -coverprofile cover.out ./...
 	go tool cover -func cover.out
 
+cover-html:
+	go test -coverpkg=./... -coverprofile cover.out ./...
+	go tool cover -html cover.out
+
 doc:
 	go run docs/generate.go
 
 clean:
 	rm -rf dist/
-	rm cover.out
+	rm -f cover.out

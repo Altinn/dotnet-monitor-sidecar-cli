@@ -2,6 +2,7 @@ package cmd
 
 import (
 	dmscmd "github.com/altinn/dotnet-monitor-sidecar-cli/pkg/cmd"
+	"github.com/altinn/dotnet-monitor-sidecar-cli/pkg/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -26,7 +27,8 @@ After you have added the sidecar, you can port forward to one of the pods with d
 Example:
 	# Add the debug sidecar to a Deployments pods
 	dmsctl add deployment my-deployment`,
-	Args: cobra.ExactArgs(1),
+	Args:              cobra.ExactArgs(1),
+	ValidArgsFunction: utils.AutoCompleteDeployments,
 	Run: func(cmd *cobra.Command, args []string) {
 		dmscmd.AddToDeployment(cmd.Context(), kubeconfig, namespace, args[0], containername, debugimage)
 	},
@@ -41,7 +43,8 @@ After you have added the sidecar, you can port forward to one of the pods with d
 Example:
 	# Add the debug sidecar to a Deployments pods
 	dmsctl add daemonset my-daemonset`,
-	Args: cobra.ExactArgs(1),
+	Args:              cobra.ExactArgs(1),
+	ValidArgsFunction: utils.AutoCompleteDaemonSets,
 	Run: func(cmd *cobra.Command, args []string) {
 		dmscmd.AddToDaemonset(cmd.Context(), kubeconfig, namespace, args[0], containername, debugimage)
 	},
