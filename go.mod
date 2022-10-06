@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/ghodss/yaml v1.0.0
-	github.com/google/uuid v1.1.2
+	github.com/google/uuid v1.3.0
 	github.com/lestrrat-go/jwx v1.2.13
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/sergi/go-diff v1.1.0
