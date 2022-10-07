@@ -8,7 +8,7 @@ require (
 	github.com/lestrrat-go/jwx v1.2.13
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/sergi/go-diff v1.1.0
-	github.com/spf13/cobra v1.3.0
+	github.com/spf13/cobra v1.5.0
 	github.com/spf13/viper v1.13.0
 	k8s.io/api v0.23.0
 	k8s.io/apimachinery v0.23.0
@@ -23,7 +23,7 @@ require (
 	github.com/PuerkitoBio/purell v1.1.1 // indirect
 	github.com/PuerkitoBio/urlesc v0.0.0-20170810143723-de5bf2ad4578 // indirect
 	github.com/chai2010/gettext-go v0.0.0-20160711120539-c6fed771bfd5 // indirect
-	github.com/cpuguy83/go-md2man/v2 v2.0.1 // indirect
+	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.0.0-20210816181553-5444fa50b93d // indirect
 	github.com/evanphx/json-patch v4.12.0+incompatible // indirect
