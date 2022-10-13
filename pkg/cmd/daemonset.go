@@ -47,7 +47,7 @@ func AddToDaemonset(ctx context.Context, kubeconfig string, namespace string, de
 		panic(err.Error())
 	}
 	fmt.Printf("Added sidecar to daemonset %s with uid %s\n", d.Name, d.UID)
-	fmt.Printf("Portforward to one of the pods with ddcli port-forward [podname].\nQuery the API with this auth header:\nAuthorization: Bearer %s\n", token)
+	fmt.Printf("Portforward to one of the pods with dmsctl port-forward [podname].\nQuery the API with this auth header:\nAuthorization: Bearer %s\n", token)
 }
 
 // RemoveFromDaemonset removes the debug sidecar and configuration from a daemonset

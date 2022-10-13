@@ -88,17 +88,17 @@ func (h *Helper) GetDDPodApplyInfo(ctx context.Context, namespace, podname strin
 	return appliedConfig, nil
 }
 
-//ListPodsInNamespace returns list of pods in a namespace
+// ListPodsInNamespace returns list of pods in a namespace
 func (h *Helper) ListPodsInNamespace(ctx context.Context, namespace string) (*corev1.PodList, error) {
 	return h.Client.CoreV1().Pods(namespace).List(ctx, metav1.ListOptions{})
 }
 
-//ListDeploymentsInNamespace returns list of deployments in a namespace
+// ListDeploymentsInNamespace returns list of deployments in a namespace
 func (h *Helper) ListDeploymentsInNamespace(ctx context.Context, namespace string) (*appsv1.DeploymentList, error) {
 	return h.Client.AppsV1().Deployments(namespace).List(ctx, metav1.ListOptions{})
 }
 
-//ListNamespaces returns list of namespaces
+// ListNamespaces returns list of namespaces
 func (h *Helper) ListNamespaces(ctx context.Context) (*corev1.NamespaceList, error) {
 	return h.Client.CoreV1().Namespaces().List(ctx, metav1.ListOptions{})
 }
