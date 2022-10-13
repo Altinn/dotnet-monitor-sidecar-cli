@@ -13,7 +13,7 @@ import (
 	"k8s.io/client-go/util/homedir"
 )
 
-//AutoCompleteDaemonSets implements autocompletion for the daemonset commands
+// AutoCompleteDaemonSets implements autocompletion for the daemonset commands
 func AutoCompleteDaemonSets(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
 	kubeconfig, namespace, err := getFlags(cmd)
 	if err != nil {
@@ -31,7 +31,7 @@ func AutoCompleteDaemonSets(cmd *cobra.Command, args []string, toComplete string
 	return names, cobra.ShellCompDirectiveDefault
 }
 
-//AutoCompleteDeployments implements autocompletion for the deployment commands
+// AutoCompleteDeployments implements autocompletion for the deployment commands
 func AutoCompleteDeployments(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
 	kubeconfig, namespace, err := getFlags(cmd)
 	if err != nil {
@@ -49,7 +49,7 @@ func AutoCompleteDeployments(cmd *cobra.Command, args []string, toComplete strin
 	return names, cobra.ShellCompDirectiveDefault
 }
 
-//AutoCompletePodsWithDebugContainer implements autocompletion for the pod commands where debug contianer is present
+// AutoCompletePodsWithDebugContainer implements autocompletion for the pod commands where debug contianer is present
 func AutoCompletePodsWithDebugContainer(cmd *cobra.Command, args []string, toComplete string) ([]string, cobra.ShellCompDirective) {
 	kubeconfig, namespace, err := getFlags(cmd)
 	if err != nil {
@@ -67,7 +67,7 @@ func AutoCompletePodsWithDebugContainer(cmd *cobra.Command, args []string, toCom
 	return names, cobra.ShellCompDirectiveDefault
 }
 
-//getKubernetesHelper returns a kubernetes helper
+// getKubernetesHelper returns a kubernetes helper
 func getKubernetesHelper(kubeconfig, namespace string) (h dmskube.Helper, ns string, err error) {
 	if home := homedir.HomeDir(); home != "" && kubeconfig == "" {
 		kubeconfig = filepath.Join(home, ".kube", "config")
@@ -91,7 +91,7 @@ func getKubernetesHelper(kubeconfig, namespace string) (h dmskube.Helper, ns str
 	}, namespace, nil
 }
 
-//getFlags returns kubeconfig and namespace flags
+// getFlags returns kubeconfig and namespace flags
 func getFlags(cmd *cobra.Command) (namespace, kubeconfig string, err error) {
 	kubeconfig, err = cmd.Flags().GetString("kubeconfig")
 	if err != nil {

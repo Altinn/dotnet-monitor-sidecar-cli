@@ -53,7 +53,7 @@ func (h *Helper) RemoveDebugSidecarDaemonSet(ctx context.Context, namespace, dep
 	return h.Client.AppsV1().DaemonSets(namespace).Update(ctx, d, metav1.UpdateOptions{})
 }
 
-//ListDaemonsetsInNamespace returns list of deployments in a namespace
+// ListDaemonsetsInNamespace returns list of deployments in a namespace
 func (h *Helper) ListDaemonsetsInNamespace(ctx context.Context, namespace string) (*appsv1.DaemonSetList, error) {
 	return h.Client.AppsV1().DaemonSets(namespace).List(ctx, metav1.ListOptions{})
 }
