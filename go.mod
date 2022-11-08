@@ -8,7 +8,7 @@ require (
 	github.com/lestrrat-go/jwx v1.2.25
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/sergi/go-diff v1.2.0
-	github.com/spf13/cobra v1.6.0
+	github.com/spf13/cobra v1.6.1
 	github.com/spf13/viper v1.13.0
 	k8s.io/api v0.23.0
 	k8s.io/apimachinery v0.23.0
