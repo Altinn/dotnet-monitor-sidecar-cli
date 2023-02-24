@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/ghodss/yaml"
-	"github.com/lestrrat-go/jwx/jwt"
+	"github.com/lestrrat-go/jwx/v2/jwt"
 	"github.com/sergi/go-diff/diffmatchpatch"
 	appsv1 "k8s.io/api/apps/v1"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -104,7 +104,7 @@ func TestHelper_AddDebugSidecarDeployment(t *testing.T) {
 			}
 
 			// Simple token validation
-			jt, err := jwt.Parse([]byte(token))
+			jt, err := jwt.Parse([]byte(token), jwt.WithVerify(false))
 			if err != nil {
 				t.Errorf("Fail to parse token: %v", err)
 				return
