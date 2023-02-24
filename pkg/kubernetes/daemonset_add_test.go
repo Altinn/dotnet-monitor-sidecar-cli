@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/lestrrat-go/jwx/jwt"
+	"github.com/lestrrat-go/jwx/v2/jwt"
 	appsv1 "k8s.io/api/apps/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/util/wait"
@@ -100,7 +100,7 @@ func TestHelper_AddDebugSidecarDaemonSet(t *testing.T) {
 					t.Errorf("unexpected number of volumes, got %v, want %v", len(actual.Spec.Template.Spec.Volumes), len(expected.Spec.Template.Spec.Volumes))
 				}
 				// Simple token validation
-				jt, err := jwt.Parse([]byte(gotToken))
+				jt, err := jwt.Parse([]byte(gotToken), jwt.WithVerify(false))
 				if err != nil {
 					t.Errorf("Fail to parse token: %v", err)
 					return

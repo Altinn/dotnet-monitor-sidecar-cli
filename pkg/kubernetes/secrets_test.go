@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/altinn/dotnet-monitor-sidecar-cli/pkg/resources"
-	"github.com/lestrrat-go/jwx/jwt"
+	"github.com/lestrrat-go/jwx/v2/jwt"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -277,7 +277,7 @@ func TestHelper_CreateJWKSecret(t *testing.T) {
 			select {
 			case sec := <-secrets:
 				t.Logf("Created secret: %s", sec.Name)
-				parsedToken, err := jwt.Parse([]byte(token))
+				parsedToken, err := jwt.Parse([]byte(token), jwt.WithVerify(false))
 				if err != nil {
 					t.Errorf("Failed to parse token: %v", err)
 				}

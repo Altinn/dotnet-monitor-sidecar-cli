@@ -8,9 +8,9 @@ import (
 	"encoding/json"
 
 	"github.com/google/uuid"
-	"github.com/lestrrat-go/jwx/jwa"
-	"github.com/lestrrat-go/jwx/jwk"
-	"github.com/lestrrat-go/jwx/jwt"
+	"github.com/lestrrat-go/jwx/v2/jwa"
+	"github.com/lestrrat-go/jwx/v2/jwk"
+	"github.com/lestrrat-go/jwx/v2/jwt"
 )
 
 // CreateJWTKey creates a JWT key and returns the token, subject and the public key
@@ -26,11 +26,11 @@ func CreateJWTKey() (token, subject, key string, err error) {
 	if err != nil {
 		return
 	}
-	jwkKey, err := jwk.New(raw)
+	jwkKey, err := jwk.FromRaw(raw)
 	if err != nil {
 		return
 	}
-	signed, err := jwt.Sign(j, jwa.ES384, jwkKey)
+	signed, err := jwt.Sign(j, jwt.WithKey(jwa.ES384, jwkKey))
 	token = string(signed)
 	pubKey, err := jwkKey.PublicKey()
 	if err != nil {
