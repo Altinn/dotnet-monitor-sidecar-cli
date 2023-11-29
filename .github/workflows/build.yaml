@@ -35,14 +35,14 @@ jobs:
           go mod tidy
           go test -v ./...
       - name: Test build
-        uses: goreleaser/goreleaser-action@v4
+        uses: goreleaser/goreleaser-action@v5
         if: success() && !startsWith(github.ref, 'refs/tags/')
         with:
           args: build --rm-dist --snapshot
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build release
-        uses: goreleaser/goreleaser-action@v4
+        uses: goreleaser/goreleaser-action@v5
         if: success() && startsWith(github.ref, 'refs/tags/')
         with:
           version: latest
