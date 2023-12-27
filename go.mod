@@ -9,7 +9,7 @@ require (
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/sergi/go-diff v1.3.1
 	github.com/spf13/cobra v1.8.0
-	github.com/spf13/viper v1.18.1
+	github.com/spf13/viper v1.18.2
 	k8s.io/api v0.24.10
 	k8s.io/apimachinery v0.24.10
 	k8s.io/cli-runtime v0.24.10
