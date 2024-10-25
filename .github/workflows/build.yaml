@@ -38,7 +38,7 @@ jobs:
         uses: goreleaser/goreleaser-action@v6
         if: success() && !startsWith(github.ref, 'refs/tags/')
         with:
-          args: build --rm-dist --snapshot
+          args: build --clean --snapshot
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Build release
@@ -46,6 +46,6 @@ jobs:
         if: success() && startsWith(github.ref, 'refs/tags/')
         with:
           version: latest
-          args: release --rm-dist
+          args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
