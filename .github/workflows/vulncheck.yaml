@@ -10,6 +10,9 @@ on:
   schedule:
     - cron: '0 6 * * *' #Every day at 6
 
+permissions:
+  contents: read
+
 jobs:
   test-build:
     name: Check for go vulnerabilities
