@@ -2,7 +2,7 @@ module github.com/altinn/dotnet-monitor-sidecar-cli
 
 go 1.24.0
 
-toolchain go1.26.2
+toolchain go1.26.3
 
 require (
 	github.com/ghodss/yaml v1.0.0
