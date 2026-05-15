@@ -14,7 +14,7 @@ require (
 	github.com/spf13/viper v1.21.0
 	k8s.io/api v0.34.1
 	k8s.io/apimachinery v0.34.1
-	k8s.io/cli-runtime v0.34.1
+	k8s.io/cli-runtime v0.36.1
 	k8s.io/client-go v0.34.1
 	k8s.io/kubectl v0.34.1
 )
