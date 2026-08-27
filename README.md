@@ -2,6 +2,12 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/altinn/dotnet-monitor-sidecar-cli)](https://goreportcard.com/report/github.com/altinn/dotnet-monitor-sidecar-cli)
 [![GitHub go.mod Go version of a Go module](https://img.shields.io/github/go-mod/go-version/altinn/dotnet-monitor-sidecar-cli.svg)](https://github.com/altinn/dotnet-monitor-sidecar-cli) 
 
+> [!IMPORTANT]
+> **This repository is archived and no longer maintained.**
+> It is kept available in read-only mode for reference. Issues and pull requests are
+> no longer accepted, and no further releases, bug fixes, or security updates will be
+> published.
+
 CLI for adding [dotnet-monitor](https://github.com/dotnet/dotnet-monitor) sidecar to pod in Kubernetes.
 
 The main goal of this cli is to ease the process of adding the dotnet-monitor docker image with existing pods in kubernetes
